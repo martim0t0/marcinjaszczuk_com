@@ -1,0 +1,40 @@
+{
+  "name": "marcinjaszczuk",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "validate-content": "bun run scripts/validate-content.ts",
+    "test": "bun test"
+  },
+  "dependencies": {
+    "next": "16.3.4",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "next-mdx-remote": "^5",
+    "gray-matter": "^4",
+    "zod": "^3",
+    "remark-gfm": "^4",
+    "rehype-slug": "^6"
+  },
+  "devDependencies": {
+    "@happy-dom/global-registrator": "^15",
+    "@tailwindcss/postcss": "^4",
+    "@testing-library/jest-dom": "^6",
+    "@testing-library/react": "^16",
+    "@testing-library/user-event": "^14",
+    "@types/bun": "^1.4.2",
+    "@types/mdx": "^2",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.4",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

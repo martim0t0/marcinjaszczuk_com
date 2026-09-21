@@ -1,0 +1,72 @@
+# Decap CMS configuration — scaffold only.
+#
+# This is enough for the Blog collection UI to render, but the GitHub
+# backend below needs an OAuth provider before anyone can actually log in
+# and publish. Decap's GitHub backend requires either:
+#   - Decap's hosted OAuth provider (simplest; see
+#     https://decapcms.org/docs/github-backend/), or
+#   - a self-hosted OAuth proxy (e.g. a small Cloudflare Worker or Netlify
+#     function) if you don't want to depend on Decap's hosted service.
+# Fill in the real `repo` value once this project has a GitHub remote, and
+# set up one of the above before pointing real editors at /admin.
+
+backend:
+  name: github
+  repo: martim0t0/marcinjaszczuk_win
+  branch: main
+site_url: https://marcinjaszczuk.com
+display_url: https://marcinjaszczuk.com
+
+# Static export means there is no server to serve media through Next's
+# image optimizer, so uploads just land in public/images and are served
+# as plain static files.
+media_folder: "public/images"
+public_folder: "/images"
+
+collections:
+  - name: blog
+    label: Blog Posts
+    folder: content/blog
+    create: true
+    slug: "{{slug}}"
+    extension: mdx
+    format: frontmatter
+    fields:
+      - label: Title
+        name: title
+        widget: string
+
+      - label: Description
+        name: description
+        widget: text
+
+      - label: Publication Date
+        name: date
+        widget: datetime
+        format: "YYYY-MM-DD"
+        date_format: "YYYY-MM-DD"
+        time_format: false
+
+      - label: Author
+        name: author
+        widget: string
+        default: "Marcin"
+
+      - label: Tags
+        name: tags
+        widget: list
+        default: []
+
+      - label: Featured Image
+        name: image
+        widget: image
+        required: false
+
+      - label: Published
+        name: published
+        widget: boolean
+        default: true
+
+      - label: Body
+        name: body
+        widget: markdown

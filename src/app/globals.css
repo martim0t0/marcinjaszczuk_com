@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #ffffff;
+  --surface: #f7f9f9;
+  --foreground: #12181a;
+  --muted: #57646a;
+  --border: #e2e8ea;
+  --accent: #0d9488;
+  --accent-strong: #0e7490;
+  --accent-foreground: #ffffff;
+  --focus-ring: #0891b2;
+
+  --ease-expand-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-collapse: cubic-bezier(0.32, 0, 0.67, 0);
+  --duration-accordion: 320ms;
+  --duration-fade: 200ms;
+}
+
+.dark {
+  --background: #0a0e0f;
+  --surface: #101617;
+  --foreground: #eef2f2;
+  --muted: #9babb0;
+  --border: #1f2a2c;
+  --accent: #2dd4bf;
+  --accent-strong: #22d3ee;
+  --accent-foreground: #04201d;
+  --focus-ring: #2dd4bf;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-focus-ring: var(--focus-ring);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-accordion: 1ms;
+    --duration-fade: 1ms;
+  }
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+.accent-gradient {
+  background-image: linear-gradient(
+    135deg,
+    var(--accent) 0%,
+    var(--accent-strong) 100%
+  );
+}
+
+@layer components {
+  .accordion-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows var(--duration-accordion)
+      var(--ease-collapse);
+  }
+
+  .accordion-panel[data-state="open"] {
+    grid-template-rows: 1fr;
+    transition-timing-function: var(--ease-expand-spring);
+  }
+
+  .accordion-panel-inner {
+    overflow: hidden;
+    min-height: 0;
+  }
+
+  .accordion-content {
+    opacity: 0;
+    transform: translateY(-4px);
+    transition:
+      opacity var(--duration-fade) ease,
+      transform var(--duration-fade) ease;
+  }
+
+  .accordion-panel[data-state="open"] .accordion-content {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .accordion-indicator {
+    transition: transform var(--duration-accordion)
+      var(--ease-expand-spring);
+  }
+
+  .accordion-trigger[aria-expanded="true"] .accordion-indicator {
+    transform: rotate(180deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .accordion-content {
+    transform: none !important;
+  }
+}
