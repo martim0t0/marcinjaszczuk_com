@@ -41,18 +41,15 @@ CI (`.github/workflows/ci.yml`) runs all of the above on every PR and push to `m
 
 ### Publishing via Decap CMS
 
-`/admin` (served from `public/admin/`) has a Blog collection wired up, but the
-GitHub backend needs an OAuth provider before anyone can actually log in and
-publish — this repo does not include one yet. Before using it for real:
+`/admin` (served from `public/admin/`) has a Blog collection wired up. The
+GitHub backend authenticates through a self-hosted OAuth provider — a small
+Cloudflare Worker in `workers/decap-oauth/`. See
+[`workers/decap-oauth/README.md`](./workers/decap-oauth/README.md) for
+one-time setup (GitHub OAuth App + deploying the worker); once `base_url` in
+`public/admin/config.yml` points at it, `/admin` logs in with GitHub directly.
 
-1. `backend.repo` in `public/admin/config.yml` is already set to
-   `martim0t0/marcinjaszczuk_com`.
-2. Set up either [Decap's hosted OAuth provider](https://decapcms.org/docs/github-backend/)
-   or a self-hosted OAuth proxy (e.g. a small Cloudflare Worker), and point
-   the GitHub OAuth App's callback at it.
-
-Once that's done, editing/publishing through `/admin` commits straight to
-`content/blog/`, which triggers CI and the GitHub Pages deploy automatically.
+Editing/publishing through `/admin` commits straight to `content/blog/`,
+which triggers CI and the GitHub Pages deploy automatically.
 
 ## Deployment
 

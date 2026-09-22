@@ -1,19 +1,14 @@
-# Decap CMS configuration — scaffold only.
+# Decap CMS configuration.
 #
-# This is enough for the Blog collection UI to render, but the GitHub
-# backend below needs an OAuth provider before anyone can actually log in
-# and publish. Decap's GitHub backend requires either:
-#   - Decap's hosted OAuth provider (simplest; see
-#     https://decapcms.org/docs/github-backend/), or
-#   - a self-hosted OAuth proxy (e.g. a small Cloudflare Worker or Netlify
-#     function) if you don't want to depend on Decap's hosted service.
-# Fill in the real `repo` value once this project has a GitHub remote, and
-# set up one of the above before pointing real editors at /admin.
+# GitHub backend auth goes through a self-hosted OAuth provider (a
+# Cloudflare Worker) — see workers/decap-oauth/README.md for setup.
+# base_url below must match wherever that worker ends up deployed.
 
 backend:
   name: github
   repo: martim0t0/marcinjaszczuk_com
   branch: main
+  base_url: https://REPLACE-WITH-YOUR-WORKER-URL.workers.dev # TODO: set after deploying workers/decap-oauth
 site_url: https://marcinjaszczuk.com
 display_url: https://marcinjaszczuk.com
 
