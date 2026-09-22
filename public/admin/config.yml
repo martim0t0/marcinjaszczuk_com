@@ -8,7 +8,7 @@ backend:
   name: github
   repo: martim0t0/marcinjaszczuk_com
   branch: main
-  base_url: https://REPLACE-WITH-YOUR-WORKER-URL.workers.dev # TODO: set after deploying workers/decap-oauth
+  base_url: https://decap-oauth.martim0t0.workers.dev # TODO: set after deploying workers/decap-oauth
 site_url: https://marcinjaszczuk.com
 display_url: https://marcinjaszczuk.com
 
