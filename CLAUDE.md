@@ -12,12 +12,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project status
 
-The full application described in SPEC.MD has been built out: interactive
-accordion resume with typed placeholder data, MDX blog with build-time
-content validation, light/dark theme system, Decap CMS scaffold (auth not
-wired up — see README), GitHub Actions CI + Pages deploy, and component
-tests. Resume/blog content in `src/data/*.ts` and `content/blog/*.mdx` is
-placeholder — swap it for real content whenever.
+The full application described in SPEC.MD has been built out and deployed:
+interactive accordion resume with real content, MDX blog with build-time
+content validation, light/dark theme system, GitHub Actions CI + Pages
+deploy to the custom domain marcinjaszczuk.com (via Cloudflare DNS/registrar),
+and component tests. Decap CMS at `/admin` is fully working, including a
+self-hosted GitHub OAuth provider (`workers/decap-oauth/`, a Cloudflare
+Worker — see its README for setup/redeploy notes). Blog content in
+`content/blog/*.mdx` is still placeholder — swap it for real posts whenever.
 
 Notable deviations from SPEC.MD's suggested structure, driven by actual
 Next.js/GitHub Pages constraints:

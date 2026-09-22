@@ -8,34 +8,9 @@
 // Requires two secrets (never commit these): GITHUB_CLIENT_ID,
 // GITHUB_CLIENT_SECRET, from a GitHub OAuth App. See ./README.md.
 
-// TEMPORARY marker + /debug route for diagnosing an env-binding issue.
-// Remove both once GITHUB_CLIENT_ID/SECRET are confirmed reaching the
-// worker at runtime.
-const DEBUG_BUILD_MARKER = "debug-build-1";
-
 const worker = {
   async fetch(request, env) {
     const url = new URL(request.url);
-
-    if (url.pathname === "/debug") {
-      return new Response(
-        JSON.stringify(
-          {
-            buildMarker: DEBUG_BUILD_MARKER,
-            hasClientId:
-              typeof env.GITHUB_CLIENT_ID === "string" &&
-              env.GITHUB_CLIENT_ID.length > 0,
-            hasClientSecret:
-              typeof env.GITHUB_CLIENT_SECRET === "string" &&
-              env.GITHUB_CLIENT_SECRET.length > 0,
-            envKeys: Object.keys(env),
-          },
-          null,
-          2,
-        ),
-        { headers: { "Content-Type": "application/json" } },
-      );
-    }
 
     if (url.pathname === "/auth") {
       return handleAuth(url, env);
