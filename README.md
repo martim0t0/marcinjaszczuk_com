@@ -46,7 +46,7 @@ GitHub backend needs an OAuth provider before anyone can actually log in and
 publish — this repo does not include one yet. Before using it for real:
 
 1. `backend.repo` in `public/admin/config.yml` is already set to
-   `martim0t0/marcinjaszczuk_win`.
+   `martim0t0/marcinjaszczuk_com`.
 2. Set up either [Decap's hosted OAuth provider](https://decapcms.org/docs/github-backend/)
    or a self-hosted OAuth proxy (e.g. a small Cloudflare Worker), and point
    the GitHub OAuth App's callback at it.

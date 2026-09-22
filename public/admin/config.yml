@@ -12,7 +12,7 @@
 
 backend:
   name: github
-  repo: martim0t0/marcinjaszczuk_win
+  repo: martim0t0/marcinjaszczuk_com
   branch: main
 site_url: https://marcinjaszczuk.com
 display_url: https://marcinjaszczuk.com
