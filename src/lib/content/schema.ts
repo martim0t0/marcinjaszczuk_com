@@ -5,10 +5,16 @@ const isoDatePattern = /^\d{4}-\d{2}-\d{2}$/;
 export const frontmatterSchema = z.object({
   title: z.string().min(1, "title is required"),
   description: z.string().min(1, "description is required"),
-  date: z
-    .string()
-    .regex(isoDatePattern, "date must be in YYYY-MM-DD format")
-    .refine((value) => !Number.isNaN(Date.parse(value)), "date is invalid"),
+  // gray-matter's YAML parser turns an unquoted `date: 2026-09-09` into a
+  // native Date, but a quoted `date: "2026-09-09"` stays a string — Decap's
+  // editor writes it unquoted, so both forms must be accepted here.
+  date: z.preprocess(
+    (value) => (value instanceof Date ? value.toISOString().slice(0, 10) : value),
+    z
+      .string()
+      .regex(isoDatePattern, "date must be in YYYY-MM-DD format")
+      .refine((value) => !Number.isNaN(Date.parse(value)), "date is invalid"),
+  ),
   author: z.string().min(1, "author is required"),
   tags: z.array(z.string()).default([]),
   published: z.boolean().default(true),

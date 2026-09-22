@@ -38,6 +38,19 @@ describe("validateFrontmatter", () => {
     }
   });
 
+  test("accepts a native Date for date (unquoted YAML, e.g. from Decap)", () => {
+    const result = validateFrontmatter("date-object", {
+      title: "A Post",
+      description: "A description",
+      date: new Date("2026-01-01T00:00:00.000Z"),
+      author: "Marcin",
+    });
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.date).toBe("2026-01-01");
+    }
+  });
+
   test("defaults tags and published when omitted", () => {
     const result = validateFrontmatter("defaults", {
       title: "A Post",
